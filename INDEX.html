@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amigo Secreto</title>
+
+    <style>
+        :root {
+            --color-primary: #6C63FF; /* Roxo suave */
+            --color-secondary: #FFFFFF; /* Branco */
+            --color-tertiary: #F1F1F1; /* Cinza claro */
+            --color-button: #FF7A00; /* Laranja suave */
+            --color-button-hover: #FF5500; /* Laranja escuro */
+            --color-text: #333333; /* Texto escuro */
+            --color-dark-green: #3D5A3E; /* Verde musgo */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Arial", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: var(--color-primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            font-family: "Arial", sans-serif;
+            color: var(--color-text);
+            padding: 0 20px;
+        }
+
+        .header-banner {
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 30px;
+        }
+
+        .main-title {
+            font-size: 58px;
+            font-family: "Merriweather", serif;
+            font-weight: bold;
+            font-style: italic;
+            color: var(--color-secondary);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .input-section {
+            background-color: var(--color-secondary);
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            padding: 40px 30px;
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-dark-green);
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .input-wrapper {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-name {
+            width: 100%;
+            padding: 12px 40px 12px 12px; /* espaço à esquerda para o ícone */
+            font-size: 18px;
+            border: 2px solid #DDD;
+            border-radius: 25px;
+            font-family: "Arial", sans-serif;
+            text-align: center;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-name::placeholder {
+            color: #888;
+        }
+
+        .input-name:focus {
+            border-color: var(--color-button);
+            outline: none;
+        }
+
+        .button-add {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 8px;
+            background-color: var(--color-button);
+            color: var(--color-secondary);
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .button-add:hover {
+            background-color: var(--color-button-hover);
+        }
+
+        .button-add i {
+            font-size: 22px;
+        }
+
+        .button-draw {
+            background-color: var(--color-dark-green);
+            color: var(--color-secondary);
+            width: auto;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            padding: 12px 25px;
+            margin-top: 20px;
+            font-size: 16px;
+            border-radius: 25px;
+        }
+
+        .button-draw img {
+            margin-right: 8px;
+            width: 18px;
+        }
+
+        .button-draw:hover {
+            background-color: var(--color-button-hover);
+        }
+
+        .buttons-wrapper {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .name-list li {
+            background-color: var(--color-tertiary);
+            padding: 12px 18px;
+            margin: 8px 0;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 18px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .name-list li.anfitriao {
+            color: #FFD700; /* Coroa amarela */
+            font-weight: bold;
+        }
+
+        .result-list {
+            margin-top: 20px;
+            color: #228B22;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            color: var(--color-secondary);
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: var(--color-secondary);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header-banner">
+        <h1 class="main-title">
+            Amigo Secreto
+            <img src="assets/amigo-secreto.png" alt="Ícone Amigo Secreto">
+        </h1>
+    </header>
+
+    <section class="input-section">
+        <h2 class="section-title">Adicione seu nome</h2>
+        <div class="input-wrapper">
+            <input type="text" id="anfitriao" class="input-name" placeholder="Digite seu nome">
+            <button class="button-add" onclick="adicionarNome()">
+                <i class="fa fa-plus"></i>
+            </button>
+        </div>
+
+        <h2 class="section-title">Adicione seus amigos</h2>
+        <div class="input-wrapper">
+            <input type="text" id="amigo" class="input-name" placeholder="Digite o nome do amigo">
+            <button class="button-add" onclick="adicionarAmigo()">
+                <i class="fa fa-plus"></i>
+            </button>
+        </div>
+
+        <ul id="listaAmigos" class="name-list"></ul>
+        <ul id="resultado" class="result-list"></ul>
+
+        <div class="buttons-wrapper">
+            <button class="button-draw" onclick="sortearAmigo()">
+                <img src="assets/play_circle_outline.png" alt="Ícone Sortear">
+                Sortear amigo
+            </button>
+            <button class="button-draw" onclick="resetarSorteio()">
+                <img src="assets/play_circle_outline.png" alt="Ícone Resetar">
+                Resetar
+            </button>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>Criado por <a href="https://github.com/johnlimasantos" target="_blank">John Lima</a></p>
+        <p>© 2025 Amigo Secreto Alura + ONE</p>
+    </footer>
+
+    <script>
+        let listaDeAmigos = [];
+        let anfitriao = ""; // Variável para armazenar o nome do anfitrião
+
+        // Função para adicionar o anfitrião (usuário) à lista
+        function adicionarNome() {
+            const inputAnfitriao = document.getElementById("anfitriao");
+            const nome = inputAnfitriao.value.trim();
+
+            if (nome === "") {
+                alert("Por favor, insira um nome válido.");
+                return;
+            }
+
+            if (listaDeAmigos.includes(nome)) {
+                alert("Você já adicionou seu nome. Não pode adicionar o mesmo nome novamente.");
+                return;
+            }
+
+            anfitriao = nome;
+            listaDeAmigos.push(nome);
+            atualizarLista();
+            inputAnfitriao.value = ""; // Limpar o campo
+        }
+
+        // Função para adicionar amigos à lista
+        function adicionarAmigo() {
+            const inputAmigo = document.getElementById("amigo");
+            const nome = inputAmigo.value.trim();
+
+            if (nome === "") {
+                alert("Por favor, insira um nome válido.");
+                return;
+            }
+
+            if (listaDeAmigos.includes(nome)) {
+                alert("Este nome já foi adicionado à lista!");
+                inputAmigo.value = "";
+                return;
+            }
+
+            listaDeAmigos.push(nome);
+            atualizarLista();
+            inputAmigo.value = "";
+        }
+
+        // Função para atualizar a lista de amigos
+        function atualizarLista() {
+            const listaElement = document.getElementById("listaAmigos");
+            listaElement.innerHTML = "";
+
+            listaDeAmigos.forEach((amigo) => {
+                const li = document.createElement("li");
+                if (amigo === anfitriao) {
+                    li.classList.add("anfitriao"); // Destacar o anfitrião com a coroa
+                    li.innerHTML = `${amigo} 👑`; // Adiciona a coroa
+                } else {
+                    li.textContent = amigo;
+                }
+                listaElement.appendChild(li);
+            });
+        }
+
+        // Função para realizar o sorteio
+        function sortearAmigo() {
+            if (listaDeAmigos.length < 2) {
+                alert("Adicione pelo menos dois nomes para realizar o sorteio.");
+                return;
+            }
+
+            let amigoSorteado = "";
+            do {
+                const sorteioIndex = Math.floor(Math.random() * listaDeAmigos.length);
+                amigoSorteado = listaDeAmigos[sorteioIndex];
+            } while (amigoSorteado === anfitriao);
+
+            if (amigoSorteado === anfitriao) {
+                alert(`Você não pode sortear você mesmo! Tente novamente.`);
+                resetarSorteio();
+            } else {
+                exibirResultado(amigoSorteado);
+            }
+        }
+
+        // Função para exibir o resultado do sorteio
+        function exibirResultado(amigo) {
+            const resultadoElement = document.getElementById("resultado");
+            resultadoElement.innerHTML = `O seu amigo secreto é: <strong>${amigo}</strong>`;
+        }
+
+        // Função para resetar o sorteio
+        function resetarSorteio() {
+            listaDeAmigos = [];
+            anfitriao = "";
+            document.getElementById("resultado").innerHTML = "";
+            atualizarLista();
+            alert("O sorteio foi resetado!");
+        }
+    </script>
+</body>
+</html>
