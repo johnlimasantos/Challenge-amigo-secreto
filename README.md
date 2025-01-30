@@ -1,7 +1,7 @@
 <div align="center">
   <h1 align="center">Aplicação Amigo Secreto</h1>
   <a href="file:///C:/Users/Micro/OneDrive/Documentos/.vscode/Amigo%20secreto/Untitled-3.html">
-    <img src="https://barbiedeti.github.io/challenge-amigo-secreto_pt-main/assets/Unknown.png" alt="Amigos" width="400">
+    <img src="https://github.com/user-attachments/assets/4ca51c61-6eda-4870-9b1c-ca5dcae1ff5c" alt="Amigos" width="400">
   </a>
 </div>
 
